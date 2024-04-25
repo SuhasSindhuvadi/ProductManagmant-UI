@@ -9,14 +9,12 @@ const EditProduct = () => {
     description: "",
     price: "",
     status: "",
+    quantity: ""
   });
 
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
-
-  const [msg] = useState("");
 
   useEffect(() => {
     productService
@@ -38,7 +36,7 @@ const EditProduct = () => {
     e.preventDefault();
 
     productService
-      .editProduct(product)
+      .editProduct(product)//resolve
       .then((res) => {
         navigate("/");
       })
@@ -54,8 +52,6 @@ const EditProduct = () => {
           <div className="col-md-6 offset-md-3">
             <div className="card">
               <div className="card-header fs-3 text-center">Edit Product</div>
-              {msg && <p className="fs-4 text-center text-success">{msg}</p>}
-
 
               <div className="card-body">
                 <form onSubmit={(e) => ProductUpdate(e)}>
@@ -75,7 +71,7 @@ const EditProduct = () => {
                       type="text"
                       name="description"
                       className="form-control"
-                      onChange={ handleChange}
+                      onChange={handleChange}
                       value={product.description}
                     />
                   </div>
@@ -85,7 +81,7 @@ const EditProduct = () => {
                       type="text"
                       name="price"
                       className="form-control"
-                      onChange={ handleChange}
+                      onChange={handleChange}
                       value={product.price}
                     />
                   </div>
@@ -95,8 +91,18 @@ const EditProduct = () => {
                       type="text"
                       name="status"
                       className="form-control"
-                      onChange={ handleChange}
+                      onChange={handleChange}
                       value={product.status}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label>Enter Quantity</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      className="form-control"
+                      onChange={handleChange}
+                      value={product.quantity}
                     />
                   </div>
                   <button className="btn btn-primary col-md-12">Update</button>

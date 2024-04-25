@@ -9,7 +9,7 @@ const AddProduct = () => {
   
   const onSubmit = (data) => {
     productService
-      .saveProduct(data)
+      .saveProduct(data)//sucess status /resolve 
       .then(() => {
         toast.success("Product Added Successfully");
         reset();

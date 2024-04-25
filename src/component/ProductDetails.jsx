@@ -4,14 +4,19 @@ import productService from "../service/product.service";
 
 const ProductDetails = () => {
     const [productList, setProductList] = useState([]);
+    /*
+    [{
+      "id":1,"productName":"laptop","description":"d.jvndjsn",
+    },{},{},{}]*/ 
     const [msg, setMsg] = useState("");
+    
     useEffect(() => {
       init();
     }, []);
   
     const init = () => {
       productService
-        .getAllProduct()
+        .getAllProduct()//sucess /resolve
         .then((res) => {
           setProductList(res.data);
         })
@@ -22,7 +27,7 @@ const ProductDetails = () => {
   
     const deleteProduct = (id) => {
       productService
-        .deleteProduct(id)
+        .deleteProduct(id)//sucess/resolve
         .then((res) => {
           setMsg("Delete Sucessfully");
           init();
@@ -40,7 +45,7 @@ const ProductDetails = () => {
               <div className="card">
                 <div className="card-header fs-3 text-center">
                   All Product List
-                  {msg && <p className="fs-4 text-center text-success">{msg}</p>}
+                  {/* {msg && <p className="fs-4 text-center text-success">{msg}</p>} */}
                 </div>
   
                 <div className="card-body">
@@ -64,7 +69,9 @@ const ProductDetails = () => {
                           <td>{p.description}</td>
                           <td>{'\u20B9'}{p.price}</td>
                           <td>{p.quantity}</td>
-                          <td>{p.status}</td>
+                          <td className={p.status === 'SOLD' ? 'text-danger' : 'text-success'}>
+                          {p.status}
+                        </td>
                           <td>
                             <Link to={'editProduct/'+p.id} className="btn btn-sm btn-primary">
                               Edit
